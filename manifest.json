@@ -1,0 +1,20 @@
+{
+  "name": "Gambling Games",
+  "short_name": "Gambling",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#181824",
+  "theme_color": "#181824",
+  "icons": [
+    {
+      "src": "gambling.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "gamblingwbg.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
