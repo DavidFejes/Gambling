@@ -68,6 +68,17 @@
             background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
             transform: scale(1.04);
         }
+        #game-frame {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            background: #181824;
+        }
         @media (max-width: 600px) {
             body {
                 padding: 0;
@@ -96,13 +107,47 @@
     </style>
 </head>
 <body>
-    <div class="menu-container">
+    <div class="menu-container" id="menu-container">
         <h1>Gambling Games</h1>
         <div class="menu-links">
-            <a class="menu-link" href="blackjack/index.html">Blackjack</a>
-            <a class="menu-link" href="roulette/index.html">Roulette</a>
-            <a class="menu-link" href="slot/index.html">Slot Machine</a>
+            <a class="menu-link" href="blackjack/index.html" data-game="blackjack/index.html">Blackjack</a>
+            <a class="menu-link" href="roulette/index.html" data-game="roulette/index.html">Roulette</a>
+            <a class="menu-link" href="slot/index.html" data-game="slot/index.html">Slot Machine</a>
         </div>
     </div>
+    <iframe id="game-frame" allowfullscreen></iframe>
+    <script>
+    const menu = document.getElementById('menu-container');
+    const frame = document.getElementById('game-frame');
+    const links = document.querySelectorAll('.menu-link');
+    function showMenu() {
+        frame.style.display = 'none';
+        menu.style.display = '';
+    }
+    function showGame(url, push=true) {
+        frame.src = url;
+        frame.style.display = 'block';
+        menu.style.display = 'none';
+        if (push) history.pushState({game: url}, '', '#' + url.replace('.html',''));
+    }
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            showGame(link.getAttribute('data-game'));
+        });
+    });
+    window.addEventListener('popstate', e => {
+        if (e.state && e.state.game) {
+            showGame(e.state.game, false);
+        } else {
+            showMenu();
+        }
+    });
+    // On load, check hash
+    if (location.hash && location.hash.length > 1) {
+        const url = location.hash.slice(1) + '.html';
+        showGame(url, false);
+    }
+    </script>
 </body>
 </html>
