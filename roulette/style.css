@@ -1,3 +1,42 @@
+@media (max-width: 700px) {
+    #controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    #controls label,
+    #controls .bet-color {
+        margin-bottom: 0;
+        margin-right: 8px;
+        font-size: 1em;
+    }
+    #controls input[type="number"] {
+        width: 80px;
+        font-size: 1em;
+        padding: 7px 8px;
+        margin-bottom: 0;
+    }
+    #controls button {
+        font-size: 1em;
+        padding: 10px 18px;
+        margin: 0 0 0 8px;
+        border-radius: 7px;
+    }
+    #result {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        font-size: 1.1em;
+        padding: 8px 10px;
+        min-width: 120px;
+        max-width: 80vw;
+    }
+}
 body {
     background: #181824;
     color: #fff;

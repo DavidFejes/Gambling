@@ -87,13 +87,25 @@ function showRules() {
 function spinRoulette() {
   if (spinning) return;
   const resultBox = document.getElementById('result');
-  resultBox.style.display = '';
+  // Hide result box immediately on spin
+  resultBox.innerHTML = '';
+  resultBox.style.display = 'none';
+  // Show again only if needed below
   const betNumberInput = document.getElementById('bet-number');
   const bet = parseInt(betNumberInput.value);
   const betColor = document.querySelector('input[name="bet-color"]:checked').value;
   // Only allow one bet type
   if ((betColor !== 'none' && betNumberInput.value !== "") || (betColor === 'none' && betNumberInput.value === "")) {
     resultBox.innerHTML = '<span style="color:#ffd600">Choose either a number or a color!</span>';
+    // Hide error after next valid spin
+    const hideError = () => {
+      if ((betColor !== 'none' && betNumberInput.value === "") || (betColor === 'none' && betNumberInput.value !== "")) {
+        resultBox.innerHTML = '';
+        resultBox.style.display = 'none';
+        document.getElementById('spin-btn').removeEventListener('click', hideError);
+      }
+    };
+    document.getElementById('spin-btn').addEventListener('click', hideError);
     return;
   }
   const result = Math.floor(Math.random() * 37);
