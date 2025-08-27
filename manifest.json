@@ -5,6 +5,7 @@
   "display": "standalone",
   "background_color": "#181824",
   "theme_color": "#181824",
+  "viewport": "width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover",
   "icons": [
     {
       "src": "gambling.png",
